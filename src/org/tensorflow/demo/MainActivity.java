@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 
 
 import org.opencv.android.OpenCVLoader;
+import org.tensorflow.demo.env.ImageUtils;
 import org.tensorflow.demo.env.Logger;
 
 import java.io.File;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private static final Logger LOGGER = new Logger();
 
     private ImageView imageView;
+
+    private Bitmap poseImage = null;
 
     static {
         if(!OpenCVLoader.initDebug()){
@@ -72,11 +76,32 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_POSE_IMAGE) {
             if(resultCode == RESULT_OK) {
                 LOGGER.e("Pose image ontvangennnn");
-                pictureFile = (File) data.getExtras().get(MainActivity.EXTRA_IMAGE);
 
-                Bitmap image = BitmapFactory.decodeFile(pictureFile.getAbsolutePath());
-                //image = Bitmap.createScaledBitmap(image, 700, 1100, true);
-                imageView.setImageBitmap(image);
+                final Intent data1 = data;
+
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //pictureFile = (File) data.getExtras().get(MainActivity.EXTRA_IMAGE);
+                        Bitmap poseBitMap = (Bitmap) data1.getExtras().get(MainActivity.EXTRA_IMAGE);
+
+                        LOGGER.e("--Rescaling bitmappppp");
+                        poseImage = Bitmap.createScaledBitmap(poseBitMap, 1100, 1700, true );
+
+                        ImageUtils.saveBitmap(poseImage);
+                        LOGGER.e("--Bitmappppp Saved");
+
+                        String path_recorded_img = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "tensorflow/preview.png";
+                        pictureFile = new File(path_recorded_img);
+
+                        // ImageView van MainAct is set to BitMap in onResume()
+                        //imageView.setImageBitmap(pose);
+                    }
+                });
+
+                t.start();
+
+
 
                 // start new activity Choose Model Pose (to server)
                 LOGGER.i("--Start ChooseModel Intent");
@@ -104,6 +129,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onResume() {
+        LOGGER.e("RESUMING MAINACt");
+
+        if(poseImage != null){
+            imageView.setImageBitmap(poseImage);
+        }
+        super.onResume();
     }
 
 

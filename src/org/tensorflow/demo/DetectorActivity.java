@@ -370,17 +370,20 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     public void takePicture(View view) {
         LOGGER.e("--- IN TAKE PiCTURE van DETECTOR jeej ---");
 
-        // oud
-        //  processImage();
+        Toast toast = Toast.makeText(this, "Picture taken.", Toast.LENGTH_SHORT);
+        toast.show();
 
-        // nieuw
-        if(croppedBitmap == null){
-            LOGGER.e("###BITMAP IS NULLLLL");
-        }
+        Intent intent = new Intent();
+        intent.putExtra(MainActivity.EXTRA_IMAGE, croppedBitmap);
+        setResult(RESULT_OK, intent);
+        LOGGER.e("--- Put bitmap in intent and finish DetectorActivity.. Return back to MainActivity ---");
+        finish();
 
+        /*
         LOGGER.e("RESIZE BITMAP ");
-        //Bitmap pose = Bitmap.createScaledBitmap(croppedBitmap, 900, 1700, true );
-        ImageUtils.saveBitmap(croppedBitmap);
+        // TODO test impact of resize
+        Bitmap pose = Bitmap.createScaledBitmap(croppedBitmap, 1100, 1700, true );
+        ImageUtils.saveBitmap(pose);
         LOGGER.e("---croppedBitmap saved 1 ---");
         Toast toast = Toast.makeText(this, "Picture taken.", Toast.LENGTH_SHORT);
         toast.show();
@@ -400,6 +403,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         intent.putExtra(MainActivity.EXTRA_IMAGE, resultingFile);
         setResult(RESULT_OK, intent);
         finish();
+        */
 
     }
 
