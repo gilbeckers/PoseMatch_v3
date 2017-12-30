@@ -1,0 +1,1 @@
+[{"outputType":{"type":"MERGED_MANIFESTS"},"apkInfo":{"type":"FULL_SPLIT","splits":[{"filterType":"ABI","value":"armeabi-v7a"}],"versionCode":-1},"path":"armeabi-v7a\\AndroidManifest.xml","properties":{"packageId":"com.gil.posematchv3","split":"","minSdkVersion":"21"}}]

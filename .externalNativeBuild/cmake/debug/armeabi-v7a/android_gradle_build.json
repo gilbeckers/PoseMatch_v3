@@ -1,0 +1,119 @@
+
+{
+	"buildFiles" : 
+	[
+		"C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/CMakeLists.txt"
+	],
+	"cleanCommands" : 
+	[
+		"C:\\Users\\Gil\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\.externalNativeBuild\\cmake\\debug\\armeabi-v7a --target clean"
+	],
+	"cppFileExtensions" : [ "cc" ],
+	"libraries" : 
+	{
+		"tensorflow_demo-Debug-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "tensorflow_demo",
+			"buildCommand" : "C:\\Users\\Gil\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\.externalNativeBuild\\cmake\\debug\\armeabi-v7a --target tensorflow_demo",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/imageutils_jni.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/frame_pair.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/image_neon.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/keypoint_detector.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/logging.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/object_detector.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/object_tracker.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/object_tracker_jni.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/optical_flow.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/time_log.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/tracked_object.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/object_tracking/utils_neon.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/rgb2yuv.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dtensorflow_demo_EXPORTS -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master -IC:\\Users\\Gil\\AndroidStudioProjects\\tensorflow-master\\tensorflow\\examples\\android\\jni -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\Gil\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -mfloat-abi=softfp -mfpu=neon -DSTANDALONE_DEMO_LIB                     -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing                     -fPIE -O0  -fPIC    -c ",
+					"src" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/jni/yuv2rgb.cc",
+					"workingDirectory" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				}
+			],
+			"output" : "C:/Users/Gil/AndroidStudioProjects/tensorflow-master/tensorflow/examples/android/gradleBuild/intermediates/cmake/debug/obj/armeabi-v7a/libtensorflow_demo.so",
+			"toolchain" : "568375"
+		}
+	},
+	"toolchains" : 
+	{
+		"568375" : 
+		{
+			"cCompilerExecutable" : "C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin/arm-linux-androideabi-gcc.exe",
+			"cppCompilerExecutable" : "C:/Users/Gil/AppData/Local/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin/arm-linux-androideabi-g++.exe"
+		}
+	}
+}
