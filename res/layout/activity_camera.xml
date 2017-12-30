@@ -13,18 +13,34 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
-    tools:context="org.tensorflow.demo.CameraActivity" >
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#000"
+        tools:context="org.tensorflow.demo.CameraActivity">
+
+
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/TakePicButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Joow"
-        android:onClick="takePicture"/>
-</FrameLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/photo_camera"
+        android:onClick="takePicture"
+        android:text="Take Picture" />
+
+</RelativeLayout>

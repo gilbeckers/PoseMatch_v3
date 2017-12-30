@@ -36,6 +36,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gradleBuild/generated/source/aidl/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/gradleBuild/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/gradleBuild/generated/source/rs/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/gradleBuild/generated/res/google-services/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/gradleBuild/generated/res/rs/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/gradleBuild/generated/res/resValues/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/gradleBuild/generated/source/apt/androidTest/debug" isTestSource="true" generated="true" />
@@ -111,6 +112,7 @@
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/instant-run-support" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/ndk" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/prebuild" />
@@ -129,28 +131,67 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="org.apache.commons:commons-math3:3.6.1@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-media-compat-26.1.0" level="project" />
+    <orderEntry type="library" name="com.android.support:recyclerview-v7-26.1.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-iid-11.8.0" level="project" />
+    <orderEntry type="library" name="android.arch.lifecycle:common:1.0.0@jar" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-base-license-11.8.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:octicons-typeface-3.2.0.4" level="project" />
+    <orderEntry type="library" name="com.mikepenz:iconics-core-3.0.0" level="project" />
+    <orderEntry type="library" name="android.arch.lifecycle:runtime-1.0.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-auth-license-11.8.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:fastadapter-extensions-expandable-3.0.3" level="project" />
+    <orderEntry type="library" name="com.mikepenz:foundation-icons-typeface-3.0.0.4" level="project" />
+    <orderEntry type="library" name="com.android.support:appcompat-v7-26.1.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:weather-icons-typeface-2.0.10.4" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-basement-license-11.8.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:materialize-1.1.2" level="project" />
+    <orderEntry type="library" name="com.android.support:support-annotations:26.1.0@jar" level="project" />
+    <orderEntry type="library" name="com.mikepenz:google-material-typeface-3.0.1.2.original" level="project" />
+    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
+    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
+    <orderEntry type="library" name="com.android.support:support-core-ui-26.1.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:ionicons-typeface-2.0.1.4" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-26.1.0" level="project" />
     <orderEntry type="library" name="org.tensorflow:tensorflow-android-1.4.0" level="project" />
-    <orderEntry type="library" name="com.android.support:recyclerview-v7-26.1.0" level="project" />
-    <orderEntry type="library" name="android.arch.lifecycle:common:1.0.0@jar" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-basement-11.8.0" level="project" />
     <orderEntry type="library" name="android.arch.core:common:1.0.0@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:support-fragment-26.1.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-vector-drawable-26.1.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-v4-26.1.0" level="project" />
-    <orderEntry type="library" name="android.arch.lifecycle:runtime-1.0.0" level="project" />
-    <orderEntry type="library" name="com.android.support:appcompat-v7-26.1.0" level="project" />
-    <orderEntry type="library" name="com.android.support:animated-vector-drawable-26.1.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-annotations:26.1.0@jar" level="project" />
-    <orderEntry type="library" name="com.loopj.android:android-async-http:1.4.9@jar" level="project" />
-    <orderEntry type="library" name="cz.msebera.android:httpclient:4.3.6@jar" level="project" />
-    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:support-core-utils-26.1.0" level="project" />
-    <orderEntry type="library" name="com.android.support:design-26.1.0" level="project" />
-    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-common-11.8.0" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-tasks-11.8.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-common-license-11.8.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-core-11.8.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:meteocons-typeface-1.1.0.4" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-database-connection-license-11.8.0" level="project" />
     <orderEntry type="library" name="com.android.support:transition-26.1.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-core-ui-26.1.0" level="project" />
+    <orderEntry type="library" name="com.android.support:design-26.1.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-auth-11.8.0" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-base-11.8.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-analytics-impl-11.8.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:fastadapter-3.0.4" level="project" />
+    <orderEntry type="library" name="com.mikepenz:community-material-typeface-2.0.46.1" level="project" />
+    <orderEntry type="library" name="org.apache.commons:commons-math3:3.6.1@jar" level="project" />
+    <orderEntry type="library" name="com.mikepenz:materialdrawer-6.0.2" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-iid-license-11.8.0" level="project" />
+    <orderEntry type="library" name="com.android.support:support-fragment-26.1.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:devicon-typeface-2.0.0.4" level="project" />
+    <orderEntry type="library" name="com.android.support:support-vector-drawable-26.1.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:typeicons-typeface-2.0.7.4" level="project" />
+    <orderEntry type="library" name="cz.msebera.android:httpclient:4.3.6@jar" level="project" />
+    <orderEntry type="library" name="com.android.support:support-core-utils-26.1.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-analytics-11.8.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-database-connection-11.8.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-database-license-11.8.0" level="project" />
+    <orderEntry type="library" name="com.android.support:support-v4-26.1.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:fontawesome-typeface-4.7.0.2" level="project" />
+    <orderEntry type="library" name="com.mikepenz:material-design-iconic-typeface-2.2.0.4" level="project" />
+    <orderEntry type="library" name="com.android.support:animated-vector-drawable-26.1.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:entypo-typeface-1.0.0.4" level="project" />
+    <orderEntry type="library" name="com.loopj.android:android-async-http:1.4.9@jar" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-database-11.8.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-analytics-license-11.8.0" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-analytics-impl-license-11.8.0" level="project" />
+    <orderEntry type="library" name="com.mikepenz:pixeden-7-stroke-typeface-1.2.0.2" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-tasks-license-11.8.0" level="project" />
     <orderEntry type="module" module-name="openCVLibrary330" />
     <orderEntry type="library" name="android-android-26" level="project" />
   </component>

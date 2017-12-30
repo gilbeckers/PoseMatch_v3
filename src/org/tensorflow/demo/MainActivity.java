@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        //DrawerUtil.getDrawer(this, myToolbar);
+        DrawerUtil.getDrawer(this, myToolbar);
     }
 
     public void startCameraView(View view) {
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 pictureFile = (File) data.getExtras().get(MainActivity.EXTRA_IMAGE);
 
                 Bitmap image = BitmapFactory.decodeFile(pictureFile.getAbsolutePath());
+                //image = Bitmap.createScaledBitmap(image, 700, 1100, true);
                 imageView.setImageBitmap(image);
 
                 // start new activity Choose Model Pose (to server)

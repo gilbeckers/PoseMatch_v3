@@ -69,7 +69,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private static final String MB_LOCATION_FILE =
             "file:///android_asset/multibox_location_priors.txt";
 
-    private static final int TF_OD_API_INPUT_SIZE = 300;
+    // Default detector is TF_OB_API
+    // TODO testje op sizes
+    private static final int TF_OD_API_INPUT_SIZE = 300;//300;
+
+
     private static final String TF_OD_API_MODEL_FILE =
             "file:///android_asset/ssd_mobilenet_v1_android_export.pb";
     private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco_labels_list.txt";
@@ -88,6 +92,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     // Which detection model to use: by default uses Tensorflow Object Detection API frozen
     // checkpoints.  Optionally use legacy Multibox (trained using an older version of the API)
     // or YOLO.
+    // TODO: detection models testen
     private enum DetectorMode {
         TF_OD_API, MULTIBOX, YOLO;
     }
@@ -103,8 +108,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
 
-    private static final boolean SAVE_PREVIEW_BITMAP = true;
+    private static final boolean SAVE_PREVIEW_BITMAP = false;
     private static final float TEXT_SIZE_DIP = 10;
+
+    private boolean save_pose = false;
 
     private Integer sensorOrientation;
 
@@ -165,6 +172,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             cropSize = MB_INPUT_SIZE;
         } else {
             try {
+                // Default is TF_OD_API
                 detector = TensorFlowObjectDetectionAPIModel.create(
                         getAssets(), TF_OD_API_MODEL_FILE, TF_OD_API_LABELS_FILE, TF_OD_API_INPUT_SIZE);
                 cropSize = TF_OD_API_INPUT_SIZE;
@@ -190,6 +198,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
         LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight);
         rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Config.ARGB_8888);
+
+        // TODO
+        // Bitmap that is saved to disk
         croppedBitmap = Bitmap.createBitmap(cropSize, cropSize, Config.ARGB_8888);
 
         frameToCropTransform =
@@ -289,10 +300,17 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         System.arraycopy(originalLuminance, 0, luminanceCopy, 0, originalLuminance.length);
         readyForNextImage();
 
+
+
         final Canvas canvas = new Canvas(croppedBitmap);
         canvas.drawBitmap(rgbFrameBitmap, frameToCropTransform, null);
+
         // For examining the actual TF input.
-        if (SAVE_PREVIEW_BITMAP) {
+
+        // Save pose to disk when takePicture()
+        // TODO: is saving naar disk noodzaak? kunt ge ni gewoon bitmap in geheugen houden?   -> en dan pas bij UploadImage naar File schrijven ofzo???
+
+        if (SAVE_PREVIEW_BITMAP ) {   // ( SAVE_REVIEW_BITMAP || save_pose)
             ImageUtils.saveBitmap(croppedBitmap);
         }
 
@@ -351,7 +369,19 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     @Override
     public void takePicture(View view) {
         LOGGER.e("--- IN TAKE PiCTURE van DETECTOR jeej ---");
-        processImage();
+
+        // oud
+        //  processImage();
+
+        // nieuw
+        if(croppedBitmap == null){
+            LOGGER.e("###BITMAP IS NULLLLL");
+        }
+
+        LOGGER.e("RESIZE BITMAP ");
+        //Bitmap pose = Bitmap.createScaledBitmap(croppedBitmap, 900, 1700, true );
+        ImageUtils.saveBitmap(croppedBitmap);
+        LOGGER.e("---croppedBitmap saved 1 ---");
         Toast toast = Toast.makeText(this, "Picture taken.", Toast.LENGTH_SHORT);
         toast.show();
 

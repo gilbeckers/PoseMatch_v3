@@ -87,6 +87,7 @@ public class ImageUtils {
             bitmap.compress(Bitmap.CompressFormat.PNG, 99, out);
             out.flush();
             out.close();
+            LOGGER.e("---croppedBitmap saved 2 ---");
         } catch (final Exception e) {
             LOGGER.e(e, "Exception!");
         }

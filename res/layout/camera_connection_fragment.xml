@@ -19,8 +19,8 @@
 
     <org.tensorflow.demo.AutoFitTextureView
         android:id="@+id/texture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true" />
 
     <org.tensorflow.demo.RecognitionScoreView
@@ -29,15 +29,7 @@
         android:layout_height="112dp"
         android:layout_alignParentTop="true" />
 
-    <ImageButton
-        android:id="@+id/TakePicButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="124dp"
-        android:background="@drawable/photo_camera"
-        android:text="Take Picture" />
+
 
     <org.tensorflow.demo.OverlayView
         android:id="@+id/debug_overlay"
