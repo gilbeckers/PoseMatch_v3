@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -147,5 +149,11 @@ public class MainActivity extends AppCompatActivity {
         // start new activity Choose Model Pose   (to server)
         Intent intent = new Intent(this, ChooseModelPose.class);
         startActivity(intent);
+    }
+
+    // Lame Camera-view (not in app)
+    // ma dus zonder OD en dus full quality!!
+    // TODO
+    public void startCameraView2(View view) {
     }
 }

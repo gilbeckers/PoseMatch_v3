@@ -29,7 +29,7 @@ tools:context="org.tensorflow.demo.MainActivity">
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="22dp"
+                android:layout_marginStart="11dp"
                 android:onClick="startCameraView"
                 android:text="Camera View"
                 tools:layout_editor_absoluteX="114dp"
@@ -39,13 +39,22 @@ tools:context="org.tensorflow.demo.MainActivity">
                 android:id="@+id/view_models"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="26dp"
+                android:layout_marginStart="11dp"
+                android:layout_toEndOf="@+id/start"
                 android:onClick="viewModels"
                 android:text="Browse Models"
                 tools:layout_editor_absoluteX="114dp"
                 tools:layout_editor_absoluteY="197dp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:onClick="startCameraView2"
+                android:text="Cam2" />
 
         </RelativeLayout>
 

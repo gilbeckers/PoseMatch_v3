@@ -32,7 +32,7 @@ public class PlotKeyPoints {
     }
 
     public static void drawCircle(Mat img, double x, double y ){
-        Imgproc.circle(img, new Point(x,y), 30, new Scalar(255,0, 0, 255), 10);
+        Imgproc.circle(img, new Point(x,y), 10, new Scalar(255,0, 0, 255), 4);
     }
 
 }
