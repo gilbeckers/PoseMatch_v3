@@ -16,6 +16,7 @@
 
 package org.tensorflow.demo;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -84,6 +85,8 @@ public class CameraConnectionFragment extends Fragment {
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
+
+
 
     /**
      * {@link android.view.TextureView.SurfaceTextureListener} handles several lifecycle events on a
@@ -232,6 +235,15 @@ public class CameraConnectionFragment extends Fragment {
 
     private final ConnectionCallback cameraConnectionCallback;
 
+    public CameraConnectionFragment(){
+        layout = 0;
+        cameraConnectionCallback = null;
+        inputSize = null;
+        imageListener = null;
+    };
+
+    // TODO
+    @SuppressLint("ValidFragment")
     private CameraConnectionFragment(
             final ConnectionCallback connectionCallback,
             final OnImageAvailableListener imageListener,

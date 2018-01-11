@@ -16,6 +16,7 @@ package org.tensorflow.demo;
  * limitations under the License.
  */
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
@@ -36,6 +37,7 @@ import org.tensorflow.demo.env.ImageUtils;
 import org.tensorflow.demo.env.Logger;
 import org.tensorflow.demo.R; // Explicit import needed for internal Google builds.
 
+@SuppressLint("ValidFragment")
 public class LegacyCameraConnectionFragment extends Fragment {
   private Camera camera;
   private static final Logger LOGGER = new Logger();

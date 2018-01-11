@@ -3,8 +3,10 @@ package org.tensorflow.demo;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,6 +18,12 @@ import org.opencv.android.OpenCVLoader;
 import org.tensorflow.demo.env.ImageUtils;
 import org.tensorflow.demo.env.Logger;
 
+import com.algorithmia.APIException;
+import com.algorithmia.AlgorithmException;
+import com.algorithmia.Algorithmia;
+import com.algorithmia.AlgorithmiaClient;
+import com.algorithmia.algo.AlgoResponse;
+import com.algorithmia.algo.Algorithm;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,9 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
     private File pictureFile;
 
+    private String apiResult = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MultiDex.install(this);
         setContentView(R.layout.activity_main);
 
         imageView = (ImageView) findViewById(R.id.imageViewPose);
@@ -58,6 +69,77 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         DrawerUtil.getDrawer(this, myToolbar);
+
+        // TODO move key to config-file
+        String algoKey = Helper.getConfigValue(this, "algoKey");
+        String algoUrl = "bilgeckers/OpTFpy3_v2/1.0.2";
+
+        //String algoInput = "\"{\"img\": \"jochen_foto1.jpg\"}\""; // {"img":"jochen_foto1.jpg"}
+        String algoInput = "{"
+                + "\"img\": \"jochen_foto1.jpg\""
+                + "}";
+
+        new AlgorithmiaTask(algoKey, algoUrl).execute(algoInput);
+
+        //AlgorithmiaClient Client = Algorithmia.client("simq5xUy+vzDpdxSDGB4ui/0b+v1");
+    }
+
+
+    private class AlgorithmiaTask extends AsyncTask<String, Void, AlgoResponse> {
+        private static final String TAG = "AlgorithmiaTask";
+
+        private String algoUrl;
+        private AlgorithmiaClient client;
+        private Algorithm algo;
+
+        public AlgorithmiaTask(String api_key, String algoUrl) {
+            super();
+            this.algoUrl = algoUrl;
+            this.client = Algorithmia.client(api_key);
+            this.algo = client.algo(algoUrl);
+        }
+
+        @Override
+        protected AlgoResponse doInBackground(String... inputs) {
+            Log.e(TAG, "--STARTING API CALL");
+            Log.e(TAG, "--with input: " + inputs[0]);
+
+            try {
+                //AlgoResponse response = algo.pipe(inputs[0]);
+                AlgoResponse response = algo.pipeJson(inputs[0]);
+                Log.e(TAG, "Response arrived! : " + response.toString());
+                Log.e(TAG, response.asJsonString());
+                return response;
+            } catch(APIException e) {
+                // Connection error
+                Log.e(TAG, "Algorithmia API Exception", e);
+                return null;
+            } catch (AlgorithmException e) {
+                e.printStackTrace();
+                Log.e(TAG, "&&&&&&&&Algorithmia API Exception", e);
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(AlgoResponse response) {
+            String result = null;
+            Log.e(TAG, "Response arrived! : " + response.toString());
+            try {
+                result = response.asJsonString();
+            } catch (AlgorithmException e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG, "API call finished, result: " + result);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            Log.e(TAG, "--STARTING API CALL2");
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
     }
 
     public void startCameraView(View view) {
