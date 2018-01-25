@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import org.opencv.android.OpenCVLoader;
@@ -32,13 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_IMAGE = "INUPUT_IMAGE" ;
     public static final String EXTRA_MODEL_POSE = "MODEL_POSE" ;
-
     private static final Logger LOGGER = new Logger();
-
     private ImageView imageView;
-
     private Bitmap poseImage = null;
-
     static {
         if(!OpenCVLoader.initDebug()){
             Log.e(CameraActivity.TAG, "OpenCV not loaded");
@@ -50,11 +47,8 @@ public class MainActivity extends AppCompatActivity {
     // https://www.sitepoint.com/creating-a-cloud-backend-for-your-android-app-using-firebase/
     //private FirebaseAuth mFirebaseAuth;
     //private FirebaseUser mFirebaseUser;
-
     private Toolbar myToolbar;
-
     private File pictureFile;
-
     private String apiResult = "";
 
     @Override
@@ -79,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 + "\"img\": \"jochen_foto1.jpg\""
                 + "}";
 
-        new AlgorithmiaTask(algoKey, algoUrl).execute(algoInput);
+        //new AlgorithmiaTask(algoKey, algoUrl).execute(algoInput);
 
         //AlgorithmiaClient Client = Algorithmia.client("simq5xUy+vzDpdxSDGB4ui/0b+v1");
     }
@@ -144,13 +138,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void startCameraView(View view) {
         Intent intent = new Intent(this, DetectorActivity.class );
-
         // Start CameraView DetectorActivity and signal .this when user clicks takePicture() -> onActivityResult() is triggered.
         this.startActivityForResult(intent, MainActivity.REQUEST_POSE_IMAGE);
     }
-
-
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -169,8 +159,9 @@ public class MainActivity extends AppCompatActivity {
                         //pictureFile = (File) data.getExtras().get(MainActivity.EXTRA_IMAGE);
                         Bitmap poseBitMap = (Bitmap) data1.getExtras().get(MainActivity.EXTRA_IMAGE);
 
+                        // Aspect ratio 3:4
                         LOGGER.e("--Rescaling bitmappppp");
-                        poseImage = Bitmap.createScaledBitmap(poseBitMap, 1100, 1700, true );
+                        poseImage = Bitmap.createScaledBitmap(poseBitMap, 1024, 1366, true );
 
                         ImageUtils.saveBitmap(poseImage);
                         LOGGER.e("--Bitmappppp Saved");
@@ -197,17 +188,24 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_MODEL_POSE) {
 
             if(resultCode == RESULT_OK) {
-                LOGGER.e("Model pose id ontvangen ");
+                LOGGER.i("Model pose id ontvangen ");
 
                 int modelId = (int) data.getExtras().get(MainActivity.EXTRA_MODEL_POSE);
-                LOGGER.e("#### IN mainactivity  model id: " + modelId);
+                LOGGER.i("#### IN mainactivity  model id: " + modelId);
 
 
                 // start UploadImageView
-                Intent intent = new Intent(this, UploadImageActivity.class);
-                intent.putExtra(MainActivity.EXTRA_IMAGE, pictureFile);
-                intent.putExtra(MainActivity.EXTRA_MODEL_POSE, modelId);
-                startActivity(intent);
+                if(pictureFile!= null) {
+                    Intent intent = new Intent(this, UploadImageActivity.class);
+                    intent.putExtra(MainActivity.EXTRA_IMAGE, pictureFile);
+                    intent.putExtra(MainActivity.EXTRA_MODEL_POSE, modelId);
+                    startActivity(intent);
+                }
+                else{
+                    LOGGER.i("Nog geen foto beschikbaar!!");
+                    Toast toast = Toast.makeText(this, "No picture taken yet", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
 
             }
         }
@@ -230,7 +228,8 @@ public class MainActivity extends AppCompatActivity {
         LOGGER.i("-----BROWSE MODELSS");
         // start new activity Choose Model Pose   (to server)
         Intent intent = new Intent(this, ChooseModelPose.class);
-        startActivity(intent);
+        //startActivity(intent);
+        this.startActivityForResult(intent, REQUEST_CODE_MODEL_POSE);
     }
 
     // Lame Camera-view (not in app)

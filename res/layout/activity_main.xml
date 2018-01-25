@@ -15,7 +15,7 @@ tools:context="org.tensorflow.demo.MainActivity">
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -29,9 +29,9 @@ tools:context="org.tensorflow.demo.MainActivity">
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="11dp"
+                android:layout_marginStart="40dp"
                 android:onClick="startCameraView"
-                android:text="Camera View"
+                android:text="Camera"
                 tools:layout_editor_absoluteX="114dp"
                 tools:layout_editor_absoluteY="197dp" />
 
@@ -39,22 +39,13 @@ tools:context="org.tensorflow.demo.MainActivity">
                 android:id="@+id/view_models"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="11dp"
-                android:layout_toEndOf="@+id/start"
+                android:layout_marginEnd="45dp"
                 android:onClick="viewModels"
                 android:text="Browse Models"
                 tools:layout_editor_absoluteX="114dp"
                 tools:layout_editor_absoluteY="197dp" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:onClick="startCameraView2"
-                android:text="Cam2" />
 
         </RelativeLayout>
 
@@ -62,7 +53,7 @@ tools:context="org.tensorflow.demo.MainActivity">
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageViewPose"
@@ -70,9 +61,23 @@ tools:context="org.tensorflow.demo.MainActivity">
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_weight="1"
+            android:minHeight="0dp"
             app:srcCompat="@android:color/darker_gray"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="86dp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You can browse models whenever you want, but make sure you take a pic first before choosing a model" />
+
     </TableRow>
 
 

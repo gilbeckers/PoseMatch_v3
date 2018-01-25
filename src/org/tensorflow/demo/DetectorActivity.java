@@ -311,7 +311,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         // TODO: is saving naar disk noodzaak? kunt ge ni gewoon bitmap in geheugen houden?   -> en dan pas bij UploadImage naar File schrijven ofzo???
 
         if (SAVE_PREVIEW_BITMAP ) {   // ( SAVE_REVIEW_BITMAP || save_pose)
+            // Wordt niet meer gebruikt, croppedBitmap wordt rechtsstreeks in de intent gestoken en dan return naar MainAct
             ImageUtils.saveBitmap(croppedBitmap);
+            LOGGER.i("Saving bitmap in cameraview, resolutions: height:", croppedBitmap.getHeight() , " width:", croppedBitmap.getWidth());
         }
 
         runInBackground(
@@ -373,6 +375,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         Toast toast = Toast.makeText(this, "Picture taken.", Toast.LENGTH_SHORT);
         toast.show();
 
+        // Grab croppedBitmap and put in Intent and then return back to MainAct
+        LOGGER.i("Grabbing croppedBitmap in cameraview, resolutions: height:", croppedBitmap.getHeight() , " width:", croppedBitmap.getWidth());
         Intent intent = new Intent();
         intent.putExtra(MainActivity.EXTRA_IMAGE, croppedBitmap);
         setResult(RESULT_OK, intent);
