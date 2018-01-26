@@ -88,7 +88,6 @@
             </intent-filter>
         </activity>
         -->
-        <activity android:name="com.gil.posematchv3.AlgoAPITestActivity"></activity>
     </application>
 
 </manifest>

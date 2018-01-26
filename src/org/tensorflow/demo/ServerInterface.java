@@ -24,7 +24,7 @@ import cz.msebera.android.httpclient.Header;
  * Created by Gil on 26/11/2017.
  */
 
-public class ServerInterface {
+public class ServerInterface implements UploadInterface{
     // json antwoord van server op img http post (bevat gedetecteerde keypoints)
     private JSONObject keypointsResponse = null;
     // keypoints van eerste persoon
@@ -95,7 +95,7 @@ public class ServerInterface {
                 parseMatchJSON();
 
                 //signal parent activity upload is ready
-                parentCallback.signalImgUploadReady(true);
+                parentCallback.signalImgUploadReady(true, "server");
             }
 
             @Override
@@ -154,7 +154,7 @@ public class ServerInterface {
                 parseKeypointsJSON();
 
                 //signal parent activity upload is ready
-                parentCallback.signalImgUploadReady(true);
+                parentCallback.signalImgUploadReady(true, "server");
             }
 
             @Override

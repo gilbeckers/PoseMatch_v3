@@ -87,9 +87,9 @@ public class ImageUtils {
             bitmap.compress(Bitmap.CompressFormat.PNG, 99, out);
             out.flush();
             out.close();
-            LOGGER.e("---croppedBitmap saved 2 ---");
+            LOGGER.e("---croppedBitmap saved 2 --- path : " + file.getAbsolutePath());
         } catch (final Exception e) {
-            LOGGER.e(e, "Exception!");
+            LOGGER.e(e, "Exception!");  // /storage/emulated/0/tensorflow/2018-01-26-15-13-09-1387909970
         }
     }
 

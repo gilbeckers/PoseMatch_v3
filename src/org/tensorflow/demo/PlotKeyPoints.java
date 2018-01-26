@@ -8,6 +8,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.tensorflow.demo.env.Logger;
 
 import java.util.ArrayList;
 
@@ -16,13 +17,14 @@ import java.util.ArrayList;
  */
 
 public class PlotKeyPoints {
+    private static final Logger LOGGER = new Logger();
 
     public static Bitmap drawKeypoints(Bitmap bitmap, ArrayList<Keypoint> keypoints){
         Mat src = new Mat(bitmap.getHeight(),bitmap.getWidth(), CvType.CV_8UC1);
         Utils.bitmapToMat(bitmap,src);
 
         for(Keypoint kp:keypoints){
-            //Log.d("plotting : " + kp.getX() + "  " + kp.getY());
+            //LOGGER.e("plotting : " + kp.getX() + "  " + kp.getY());
             drawCircle(src, kp.getX(), kp.getY());
         }
 

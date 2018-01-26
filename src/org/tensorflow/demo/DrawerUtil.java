@@ -22,6 +22,8 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import org.tensorflow.demo.env.Logger;
+
 /**
  * Created by Gil on 28/12/2017.
  */
@@ -36,11 +38,17 @@ public class DrawerUtil {
     private static Drawer result;
     private static AccountHeader headerResult;
     private static ProfileDrawerItem profile = new ProfileDrawerItem().withIdentifier(1); // = loadProfile();
+    private static final Logger LOGGER = new Logger();
 
     public static void getDrawer(final Activity activity, Toolbar toolbar){
         //if you want to update the items at a later time it is recommended to keep it in a variable
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home);
-        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_settings);
+        //PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home);
+
+        final PrimaryDrawerItem item2 = new PrimaryDrawerItem().
+                withIdentifier(2)
+                .withName("Host: "+ Settings.getInstance().getUploadDestination() +" (click to change)")
+                .withIcon(FontAwesome.Icon.faw_server)
+                .withDescription("Note that cloud is less \naccurate (MobileNet)");
         PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_login);
         //SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_settings);
 
@@ -49,20 +57,23 @@ public class DrawerUtil {
             item3.withSelectable(false);
         }
 
-        SecondaryDrawerItem drawerItemSettings = new SecondaryDrawerItem().withIdentifier(4)
-                .withName(R.string.settings).withIcon(FontAwesome.Icon.faw_binoculars);
+        //SecondaryDrawerItem drawerItemSettings = new SecondaryDrawerItem().withIdentifier(4)
+        //        .withName(R.string.settings).withIcon(FontAwesome.Icon.faw_binoculars);
         SecondaryDrawerItem drawerItemAbout = new SecondaryDrawerItem().withIdentifier(5)
                 .withName(R.string.about).withIcon(FontAwesome.Icon.faw_pencil);
+        /*
         SecondaryDrawerItem drawerItemHelp = new SecondaryDrawerItem().withIdentifier(6)
                 .withName(R.string.help).withIcon(FontAwesome.Icon.faw_wifi);
         SecondaryDrawerItem drawerItemDonate = new SecondaryDrawerItem().withIdentifier(7)
                 .withName(R.string.donate).withIcon(FontAwesome.Icon.faw_magic);
+                */
+
         SecondaryDrawerItem drawerSignOut = new SecondaryDrawerItem().withIdentifier(8)
                 .withName(R.string.signout).withIcon(FontAwesome.Icon.faw_sign_out);
 
-        item1.withName("A new name for this drawerItem").withBadge("19").withBadgeStyle(new BadgeStyle().withTextColor(Color.BLACK).withColorRes(R.color.md_red_700));
+        //item1.withName("A new name for this drawerItem").withBadge("19").withBadgeStyle(new BadgeStyle().withTextColor(Color.BLACK).withColorRes(R.color.md_red_700));
         //item1.withEnabled(false);
-        item1.withSelectable(false);
+        //item1.withSelectable(false);
 
         loadProfile();
 
@@ -92,14 +103,14 @@ public class DrawerUtil {
                 .withSelectedItem(-1)
                 .withCloseOnClick(true)
                 .addDrawerItems(
-                        item1,
+                        //item1,
                         item2,
                         item3,
                         new DividerDrawerItem(),
-                        drawerItemSettings,
+                        //drawerItemSettings,
                         drawerItemAbout,
-                        drawerItemHelp,
-                        drawerItemDonate,
+                        //drawerItemHelp,
+                        //drawerItemDonate,
                         drawerSignOut
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -118,6 +129,15 @@ public class DrawerUtil {
                                 // Not logged in, launch the Log In activity
                                 loadLogInView(activity);
                             }
+
+                        }
+
+                        // Change host: server jochen <-> cloud
+                        if(drawerItem.getIdentifier() == 2){
+                            String currentHost = Settings.getInstance().toggleUploadDestination();
+                            item2.withName("Host: " + currentHost + " (click to change)");
+                            result.updateItem(item2);
+                            LOGGER.e("### UPDATING DRAWER HOST BUTTON with host: " + currentHost);
 
                         }
 

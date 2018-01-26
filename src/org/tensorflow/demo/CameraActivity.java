@@ -39,6 +39,7 @@ import android.util.Size;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.nio.ByteBuffer;
@@ -82,6 +83,7 @@ public abstract class CameraActivity extends Activity
         LOGGER.d("onCreate " + this);
         super.onCreate(null);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
 
         setContentView(R.layout.activity_camera);
 
@@ -232,6 +234,8 @@ public abstract class CameraActivity extends Activity
     public synchronized void onResume() {
         LOGGER.d("onResume " + this);
         super.onResume();
+
+
 
         handlerThread = new HandlerThread("inference");
         handlerThread.start();

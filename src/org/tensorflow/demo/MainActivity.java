@@ -2,7 +2,7 @@ package org.tensorflow.demo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,12 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-
 import org.opencv.android.OpenCVLoader;
 import org.tensorflow.demo.env.ImageUtils;
 import org.tensorflow.demo.env.Logger;
-
 import com.algorithmia.APIException;
 import com.algorithmia.AlgorithmException;
 import com.algorithmia.Algorithmia;
@@ -26,12 +23,15 @@ import com.algorithmia.AlgorithmiaClient;
 import com.algorithmia.algo.AlgoResponse;
 import com.algorithmia.algo.Algorithm;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_MODEL_POSE = 1;
     public static final int REQUEST_POSE_IMAGE = 2;
 
-    public static final String EXTRA_IMAGE = "INUPUT_IMAGE" ;
+    public static final String EXTRA_IMAGE = "INUPUT_IMAGE";
     public static final String EXTRA_MODEL_POSE = "MODEL_POSE" ;
     private static final Logger LOGGER = new Logger();
     private ImageView imageView;
@@ -43,10 +43,6 @@ public class MainActivity extends AppCompatActivity {
             Log.e(CameraActivity.TAG, "OpenCV loaded");
         }
     }
-
-    // https://www.sitepoint.com/creating-a-cloud-backend-for-your-android-app-using-firebase/
-    //private FirebaseAuth mFirebaseAuth;
-    //private FirebaseUser mFirebaseUser;
     private Toolbar myToolbar;
     private File pictureFile;
     private String apiResult = "";
@@ -66,19 +62,17 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO move key to config-file
         String algoKey = Helper.getConfigValue(this, "algoKey");
-        String algoUrl = "bilgeckers/OpTFpy3_v2/1.0.2";
+        String algoUrl = "bilgeckers/OpTFpy3_v2/1.0.5";
 
         //String algoInput = "\"{\"img\": \"jochen_foto1.jpg\"}\""; // {"img":"jochen_foto1.jpg"}
         String algoInput = "{"
-                + "\"img\": \"jochen_foto1.jpg\""
+                + "\"img_file\":\"data://bilgeckers/multiperson_matching/jochen_foto1.jpg\""
                 + "}";
 
         //new AlgorithmiaTask(algoKey, algoUrl).execute(algoInput);
-
-        //AlgorithmiaClient Client = Algorithmia.client("simq5xUy+vzDpdxSDGB4ui/0b+v1");
     }
 
-
+    /*
     private class AlgorithmiaTask extends AsyncTask<String, Void, AlgoResponse> {
         private static final String TAG = "AlgorithmiaTask";
 
@@ -134,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(Void... values) {}
-    }
+    }*/
 
     public void startCameraView(View view) {
         Intent intent = new Intent(this, DetectorActivity.class );
@@ -153,30 +147,42 @@ public class MainActivity extends AppCompatActivity {
 
                 final Intent data1 = data;
 
-                Thread t = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //pictureFile = (File) data.getExtras().get(MainActivity.EXTRA_IMAGE);
-                        Bitmap poseBitMap = (Bitmap) data1.getExtras().get(MainActivity.EXTRA_IMAGE);
+                //pictureFile = (File) data.getExtras().get(MainActivity.EXTRA_IMAGE);
+                //Bitmap poseBitMap = (Bitmap) data1.getExtras().get(MainActivity.EXTRA_IMAGE);
 
-                        // Aspect ratio 3:4
-                        LOGGER.e("--Rescaling bitmappppp");
-                        poseImage = Bitmap.createScaledBitmap(poseBitMap, 1024, 1366, true );
+                // Aspect ratio 3:4
+                LOGGER.e("--Rescaling bitmappppp");
+                poseImage = ImageFrameHolder.getInstance().getFrame(); // full size BitMap
+                poseImage = Bitmap.createScaledBitmap(poseImage, 1366, 1024, true );
 
-                        ImageUtils.saveBitmap(poseImage);
-                        LOGGER.e("--Bitmappppp Saved");
+                // Rotate the bitmap
+                Matrix matrix = new Matrix();
+                // setup rotation degree
+                matrix.postRotate(90);
+                poseImage = Bitmap.createBitmap(poseImage, 0, 0, poseImage.getWidth(), poseImage.getHeight(), matrix, true);
 
-                        String path_recorded_img = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "tensorflow/preview.png";
-                        pictureFile = new File(path_recorded_img);
+                // Make random filename for one server/cloud
+                // Get timestamp
+                String timestamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());
 
-                        // ImageView van MainAct is set to BitMap in onResume()
-                        //imageView.setImageBitmap(pose);
-                    }
-                });
-
-                t.start();
+                // Generate random id
+                Random rand = new Random();
+                int randomNum = rand.nextInt();
 
 
+                String randomFileName = timestamp + randomNum + ".png"; //+ randomNum;
+                LOGGER.e("Randiom id: " + randomFileName);
+
+                ImageUtils.saveBitmap(poseImage, randomFileName);
+                //String path_recorded_img = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "tensorflow/preview.png";
+                String path_recorded_img = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "tensorflow/"+ randomFileName;
+
+
+                pictureFile = new File(path_recorded_img);
+                LOGGER.e("--Bitmappppp Saved");
+                LOGGER.e("Saved image: " + path_recorded_img);
+
+                LOGGER.e("image name: " + pictureFile.getName());
 
                 // start new activity Choose Model Pose (to server)
                 LOGGER.i("--Start ChooseModel Intent");

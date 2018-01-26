@@ -21,6 +21,7 @@ public class UploadImageActivity extends AppCompatActivity {
     private TextView txtStatus;
     private ImageView imageView;
     private ServerInterface restClient;
+    private CloudInterface cloudClient;
     private Bitmap image;
 
 
@@ -48,11 +49,28 @@ public class UploadImageActivity extends AppCompatActivity {
         image = BitmapFactory.decodeFile(pictureFile.getAbsolutePath());
         imageView.setImageBitmap(image);
 
-        restClient = new ServerInterface(this);
-        //Log.d(MainActivity.TAG, "Start upload to server");
-        //restClient.uploadImg(pictureFile);
-        Log.d(CameraActivity.TAG, "Start findmatch to server");
-        restClient.findMatch(pictureFile, modelId);
+        if(Settings.getInstance().getUploadDestination().equals("cloud"))
+        {
+            // -- CLOUD UPLOAD ----
+            LOGGER.e("Starting upload to CLOUD");
+            txtStatus.setText("Start upload... First call can take a while because server needs to wake up");
+            ImageFrameHolder.getInstance().setImgFileToUpload(pictureFile);
+            cloudClient = new CloudInterface(this);
+            cloudClient.findMatch(pictureFile, modelId);
+
+        }
+        else{
+            // ---- SERVER UPLOAD -----
+            LOGGER.e("Starting upload to SERVER JOCHEN");
+            restClient = new ServerInterface(this);
+            restClient.findMatch(pictureFile, modelId);
+
+        }
+
+
+
+
+
 
     }
 
@@ -78,11 +96,22 @@ public class UploadImageActivity extends AppCompatActivity {
 
 
     // is called by ServerInteface when async HTTP POST is finished
-    public void signalImgUploadReady(boolean result){
+    public void signalImgUploadReady(boolean result, String host){
         if(result) {
-            txtStatus.setText("Upload finished , match: " + restClient.isMatchOrNot());
+            ArrayList<Keypoint> keypoints = null;
 
-            ArrayList<Keypoint> keypoints = restClient.getKeypointListPerson1();
+            // Server jochen
+            if(host.equals("server")) {
+                txtStatus.setText("Upload finished met jochen server, match: " + restClient.isMatchOrNot());
+                keypoints = restClient.getKeypointListPerson1();
+            }
+            // Cloud algorithmia
+            else if(host.equals("cloud")){
+                txtStatus.setText("Upload finished met cloud, match: " + cloudClient.isMatchOrNot());
+                keypoints = cloudClient.getKeypointListPerson1();
+            }
+
+            // TODO add error handling if keypoints is null
             Bitmap newImg = PlotKeyPoints.drawKeypoints(image, keypoints);
             imageView.setImageBitmap(newImg);
             //CameraActivity.UPLOADING = false;

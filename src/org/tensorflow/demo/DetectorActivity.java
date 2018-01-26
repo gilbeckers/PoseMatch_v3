@@ -36,6 +36,7 @@ import android.util.Size;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
@@ -135,10 +136,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     private BorderedText borderedText;
 
-    private File resultingFile;
+
 
     @Override
     public void onPreviewSizeChosen(final Size size, final int rotation) {
+
+        //captureButton = findViewById(R.id.TakePicButton);
         final float textSizePx =
                 TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
@@ -301,9 +304,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         readyForNextImage();
 
 
-
         final Canvas canvas = new Canvas(croppedBitmap);
         canvas.drawBitmap(rgbFrameBitmap, frameToCropTransform, null);
+
 
         // For examining the actual TF input.
 
@@ -375,41 +378,28 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         Toast toast = Toast.makeText(this, "Picture taken.", Toast.LENGTH_SHORT);
         toast.show();
 
+        /*
+        try {
+            // Force context-switch so that picture is surley saved to disk.
+            readyForNextImage();
+            Thread.sleep(1500);  // TODO fine-tuning
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
+        Bitmap pose = rgbFrameBitmap.copy(rgbFrameBitmap.getConfig(), true);
         // Grab croppedBitmap and put in Intent and then return back to MainAct
-        LOGGER.i("Grabbing croppedBitmap in cameraview, resolutions: height:", croppedBitmap.getHeight() , " width:", croppedBitmap.getWidth());
+        // Full size picture-frame can niet worden doorgeven via intent want is te groot
+
         Intent intent = new Intent();
-        intent.putExtra(MainActivity.EXTRA_IMAGE, croppedBitmap);
+        intent.putExtra(MainActivity.EXTRA_IMAGE, croppedBitmap); // wordt niet meer gebruik, we gebruiken de full scale bitmap 'pose' -> zie signleton ImageFrameHolder
+        ImageFrameHolder.getInstance().setFrame(pose);
         setResult(RESULT_OK, intent);
         LOGGER.e("--- Put bitmap in intent and finish DetectorActivity.. Return back to MainActivity ---");
         finish();
-
-        /*
-        LOGGER.e("RESIZE BITMAP ");
-        // TODO test impact of resize
-        Bitmap pose = Bitmap.createScaledBitmap(croppedBitmap, 1100, 1700, true );
-        ImageUtils.saveBitmap(pose);
-        LOGGER.e("---croppedBitmap saved 1 ---");
-        Toast toast = Toast.makeText(this, "Picture taken.", Toast.LENGTH_SHORT);
-        toast.show();
-
-        try {
-            // Force context-switch so that picture is surley saved to disk.
-            Thread.sleep(400);  // TODO fine-tuning
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        String path_recorded_img = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "tensorflow/preview.png";
-        resultingFile = new File(path_recorded_img);
-        LOGGER.e("--###Picure taken: " + resultingFile.getAbsolutePath());
-
-        Intent intent = new Intent();
-        intent.putExtra(MainActivity.EXTRA_IMAGE, resultingFile);
-        setResult(RESULT_OK, intent);
-        finish();
-        */
-
+        return;
     }
+
 
     @Override
     protected int getLayoutId() {
