@@ -47,16 +47,19 @@ public class CloudInterface implements UploadInterface{
     public CloudInterface(UploadImageActivity parent){
         this.parent = parent;
         algoKey = Helper.getConfigValue(parent, "algoKey"); // Not included in .git, get your own!
-        algoUrl = "bilgeckers/OpTFpy3_v2/1.0.6";
-        algoInput = "{"
-                + "\"img_file\":\"data://bilgeckers/multiperson_matching/"+ ImageFrameHolder.getInstance().getImgFileToUpload().getName() +"\""
-                + "}";
+        algoUrl = "bilgeckers/OpTFpy3_v2/1.0.8";
+
 
         client = Algorithmia.client(algoKey);
     }
 
     public void findMatch(File imgToUpload, int modelId){
-        LOGGER.e("Starting Algorithmia call");
+
+        algoInput = "{"
+                + "\"img_file\":\"data://bilgeckers/multiperson_matching/"+ ImageFrameHolder.getInstance().getImgFileToUpload().getName() +"\","
+                + "\"model_id\":" + modelId
+                + "}";
+        LOGGER.e("Starting Algorithmia call with input: %s", algoInput);
         new AlgorithmiaTask(algoKey, algoUrl, client).execute(algoInput);
     }
 
