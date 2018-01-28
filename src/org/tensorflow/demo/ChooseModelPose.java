@@ -61,8 +61,8 @@ public class ChooseModelPose extends AppCompatActivity {
         modelMap.put(1, "model1");
         modelMap.put(2, "model2");
         modelMap.put(3, "model3");
-        modelMap.put(4, "model4");
-        modelMap.put(5, "model5");
+        //modelMap.put(4, "model4");
+        //modelMap.put(5, "model5");
         modelMap.put(6, "model6");
     }
 

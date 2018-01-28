@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -129,6 +130,10 @@ public class DrawerUtil {
                                 // Not logged in, launch the Log In activity
                                 loadLogInView(activity);
                             }
+                            else{
+                                Toast toast = Toast.makeText(activity, "Already logged in", Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
 
                         }
 
@@ -136,7 +141,13 @@ public class DrawerUtil {
                         if(drawerItem.getIdentifier() == 2){
                             String currentHost = Settings.getInstance().toggleUploadDestination();
                             item2.withName("Host: " + currentHost + " (click to change)");
+                            item2.withSetSelected(false);
+
                             result.updateItem(item2);
+
+                            Toast toast = Toast.makeText(activity, "Hosted changed to " + currentHost, Toast.LENGTH_SHORT);
+                            toast.show();
+
                             LOGGER.e("### UPDATING DRAWER HOST BUTTON with host: " + currentHost);
 
                         }
