@@ -125,6 +125,7 @@
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/splits-support" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/symbols" />
+      <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/gradleBuild/tmp" />

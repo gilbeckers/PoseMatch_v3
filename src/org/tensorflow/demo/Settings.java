@@ -13,7 +13,7 @@ public class Settings {
     }
 
 
-    private String uploadDestination = "cloud";  // Server of cloud
+    private String uploadDestination = "server";  // Server of cloud
 
     public String getUploadDestination() {
         return uploadDestination;

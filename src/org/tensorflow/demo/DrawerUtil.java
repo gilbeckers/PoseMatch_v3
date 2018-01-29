@@ -137,6 +137,10 @@ public class DrawerUtil {
 
                         }
 
+                        if(drawerItem.getIdentifier() == 5){
+                            loadAboutActivity(activity);
+                        }
+
                         // Change host: server jochen <-> cloud
                         if(drawerItem.getIdentifier() == 2){
                             String currentHost = Settings.getInstance().toggleUploadDestination();
@@ -179,6 +183,11 @@ public class DrawerUtil {
         result.getDrawerItem(3).withSelectable(true);
 
 
+    }
+
+    public static void loadAboutActivity(Activity activity){
+        Intent intent = new Intent(activity, AboutActivity.class);
+        activity.startActivity(intent);
     }
 
     public static void loadProfile(){

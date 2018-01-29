@@ -50,7 +50,7 @@
             android:name=".DetectorActivity"
             android:label="@string/activity_name_detection"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChooseModelPose"
             android:parentActivityName=".MainActivity" />
@@ -88,6 +88,15 @@
             </intent-filter>
         </activity>
         -->
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.tensorflow.demo.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
