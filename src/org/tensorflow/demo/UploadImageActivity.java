@@ -102,7 +102,7 @@ public class UploadImageActivity extends AppCompatActivity {
 
             // Server jochen
             if(host.equals("server")) {
-                txtStatus.setText("Upload finished met jochen server, match: " + restClient.isMatchOrNot());
+                txtStatus.setText("Upload finished met jochen server, match: " + restClient.isMatchOrNot() + " \npose: " + restClient.getMp_score());
                 keypoints = restClient.getKeypointListPerson1();
             }
             // Cloud algorithmia

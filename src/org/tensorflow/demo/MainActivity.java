@@ -3,7 +3,6 @@ package org.tensorflow.demo;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.multidex.MultiDex;
@@ -11,19 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import org.opencv.android.OpenCVLoader;
 import org.tensorflow.demo.env.ImageUtils;
 import org.tensorflow.demo.env.Logger;
-import com.algorithmia.APIException;
-import com.algorithmia.AlgorithmException;
-import com.algorithmia.Algorithmia;
-import com.algorithmia.AlgorithmiaClient;
-import com.algorithmia.algo.AlgoResponse;
-import com.algorithmia.algo.Algorithm;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -33,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_IMAGE = "INUPUT_IMAGE";
     public static final String EXTRA_MODEL_POSE = "MODEL_POSE" ;
+    public static final String REFRESH_MODELS = "REFRESH_MODELS";
+    public static final String MODEL_POSES = "MODEL_POSES";
     private static final Logger LOGGER = new Logger();
     private ImageView imageView;
     private Bitmap poseImage = null;
@@ -47,11 +44,21 @@ public class MainActivity extends AppCompatActivity {
     private File pictureFile;
     private String apiResult = "";
 
+    private Button butAddModel;
+
+    private ServerInterface server = new ServerInterface();
+    private ArrayList<String> modelPoses = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MultiDex.install(this);
         setContentView(R.layout.activity_main);
+
+        modelPoses = server.getAllModels(this);
+
+        butAddModel = (Button) findViewById(R.id.add_model);
+        butAddModel.setEnabled(false);
 
         imageView = (ImageView) findViewById(R.id.imageViewPose);
 
@@ -69,66 +76,12 @@ public class MainActivity extends AppCompatActivity {
                 + "\"img_file\":\"data://bilgeckers/multiperson_matching/jochen_foto1.jpg\""
                 + "}";
 
-        //new AlgorithmiaTask(algoKey, algoUrl).execute(algoInput);
+
     }
 
-    /*
-    private class AlgorithmiaTask extends AsyncTask<String, Void, AlgoResponse> {
-        private static final String TAG = "AlgorithmiaTask";
 
-        private String algoUrl;
-        private AlgorithmiaClient client;
-        private Algorithm algo;
 
-        public AlgorithmiaTask(String api_key, String algoUrl) {
-            super();
-            this.algoUrl = algoUrl;
-            this.client = Algorithmia.client(api_key);
-            this.algo = client.algo(algoUrl);
-        }
 
-        @Override
-        protected AlgoResponse doInBackground(String... inputs) {
-            Log.e(TAG, "--STARTING API CALL");
-            Log.e(TAG, "--with input: " + inputs[0]);
-
-            try {
-                //AlgoResponse response = algo.pipe(inputs[0]);
-                AlgoResponse response = algo.pipeJson(inputs[0]);
-                Log.e(TAG, "Response arrived! : " + response.toString());
-                Log.e(TAG, response.asJsonString());
-                return response;
-            } catch(APIException e) {
-                // Connection error
-                Log.e(TAG, "Algorithmia API Exception", e);
-                return null;
-            } catch (AlgorithmException e) {
-                e.printStackTrace();
-                Log.e(TAG, "&&&&&&&&Algorithmia API Exception", e);
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(AlgoResponse response) {
-            String result = null;
-            Log.e(TAG, "Response arrived! : " + response.toString());
-            try {
-                result = response.asJsonString();
-            } catch (AlgorithmException e) {
-                e.printStackTrace();
-            }
-            Log.e(TAG, "API call finished, result: " + result);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            Log.e(TAG, "--STARTING API CALL2");
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {}
-    }*/
 
     public void startCameraView(View view) {
         Intent intent = new Intent(this, DetectorActivity.class );
@@ -187,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 // start new activity Choose Model Pose (to server)
                 LOGGER.i("--Start ChooseModel Intent");
                 Intent intent = new Intent(this, ChooseModelPose.class);
+                intent.putExtra(MainActivity.MODEL_POSES, modelPoses);
                 this.startActivityForResult(intent, REQUEST_CODE_MODEL_POSE);
             }
         }
@@ -194,23 +148,34 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_MODEL_POSE) {
 
             if(resultCode == RESULT_OK) {
-                LOGGER.i("Model pose id ontvangen ");
 
-                int modelId = (int) data.getExtras().get(MainActivity.EXTRA_MODEL_POSE);
-                LOGGER.i("#### IN mainactivity  model id: " + modelId);
-
-
-                // start UploadImageView
-                if(pictureFile!= null) {
-                    Intent intent = new Intent(this, UploadImageActivity.class);
-                    intent.putExtra(MainActivity.EXTRA_IMAGE, pictureFile);
-                    intent.putExtra(MainActivity.EXTRA_MODEL_POSE, modelId);
-                    startActivity(intent);
-                }
-                else{
-                    LOGGER.i("Nog geen foto beschikbaar!!");
-                    Toast toast = Toast.makeText(this, "No picture taken yet", Toast.LENGTH_SHORT);
+                if((int) data.getExtras().get(MainActivity.REFRESH_MODELS) == 1){
+                    LOGGER.i("Refreshing models ... ");
+                    Toast toast = Toast.makeText(this, "Refreshing models ...", Toast.LENGTH_SHORT);
                     toast.show();
+
+                    modelPoses = server.getAllModels(this);
+                }
+
+                else {
+
+                    LOGGER.i("Model pose id ontvangen ");
+
+                    int modelId = (int) data.getExtras().get(MainActivity.EXTRA_MODEL_POSE);
+                    LOGGER.i("#### IN mainactivity  model id: " + modelId);
+
+
+                    // start UploadImageView
+                    if (pictureFile != null) {
+                        Intent intent = new Intent(this, UploadImageActivity.class);
+                        intent.putExtra(MainActivity.EXTRA_IMAGE, pictureFile);
+                        intent.putExtra(MainActivity.EXTRA_MODEL_POSE, modelId);
+                        startActivity(intent);
+                    } else {
+                        LOGGER.i("Nog geen foto beschikbaar!!");
+                        Toast toast = Toast.makeText(this, "No picture taken yet", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
 
             }
@@ -225,6 +190,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(poseImage != null){
             imageView.setImageBitmap(poseImage);
+            butAddModel.setEnabled(true);
+
         }
         super.onResume();
     }
@@ -234,8 +201,23 @@ public class MainActivity extends AppCompatActivity {
         LOGGER.i("-----BROWSE MODELSS");
         // start new activity Choose Model Pose   (to server)
         Intent intent = new Intent(this, ChooseModelPose.class);
+        intent.putExtra(MainActivity.MODEL_POSES, modelPoses);
         //startActivity(intent);
         this.startActivityForResult(intent, REQUEST_CODE_MODEL_POSE);
+    }
+
+    public void addModel(View view){
+        LOGGER.i("--- AADDDD MODEL");
+
+        if(pictureFile != null){
+            server.uploadNewModel(pictureFile, this);
+        }
+
+    }
+
+    public void displayFeedback(String mess){
+        Toast toast = Toast.makeText(this, mess, Toast.LENGTH_LONG);
+        toast.show();
     }
 
     // Lame Camera-view (not in app)

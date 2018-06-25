@@ -27,6 +27,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Choose a model " />
+
+            <Button
+                android:id="@+id/btn_refresh"
+                android:onClick="refreshModels"
+                android:text="Refresh"
+                android:visibility="visible" />
         </TableRow>
     </TableLayout>
 </ScrollView>

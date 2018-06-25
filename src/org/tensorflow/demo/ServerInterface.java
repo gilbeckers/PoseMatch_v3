@@ -1,6 +1,9 @@
 package org.tensorflow.demo;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -11,11 +14,10 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.tensorflow.demo.env.ImageUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
@@ -33,6 +35,15 @@ public class ServerInterface implements UploadInterface{
     // beslissing van pose matching door server (  na findmatch()  )
     private String matchOrNot;
 
+
+
+    private double sp_score;
+    private double mp_score;
+    private double us_score;
+
+    //private HashMap<String, Bitmap> modelPoses = new HashMap<>();
+    private ArrayList<String> modelPoses = new ArrayList<>();
+
     private ArrayList<Keypoint> keypointListPerson1 = new ArrayList<>();
 
     // Activity parent; wordt gebruikt om terug te singallen als async http post klaar is
@@ -41,6 +52,8 @@ public class ServerInterface implements UploadInterface{
     public ServerInterface(UploadImageActivity parent){
         parentCallback = parent;
     }
+
+    public ServerInterface(){};
 
     // asynch http post call dus met callback werken -> voor wanneer server terug antwoord
     public void findMatch(File imgToUpload, int modelId){
@@ -107,10 +120,86 @@ public class ServerInterface implements UploadInterface{
         });
     }
 
+    public ArrayList<String> getAllModels(MainActivity parent){
+        String Url = "http://1dr8.be/getAllPoses";
+        //If any auth is needed
+        String username = "username";
+        String password = "password";
+
+        // Bitmap compressedImage = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setBasicAuth(username, password);
+        client.addHeader("enctype", "multipart/form-data");
+
+        modelPoses.clear();
+
+        client.get(Url, new JsonHttpResponseHandler() {
+
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray responseBody) {
+
+                //Do what's needed
+                Log.d("APP ", "Gelukt!!!:");
+                Log.d("APP", "antwoord: " + responseBody.toString());
+                String pic1 = "";
+
+                try {
+                    //pic1 = responseBody.getJSONObject(0).getString("foto");
+                    //pic1 = responseBody.getJSONObject(0);
+
+                    for(int i=0; i<responseBody.length();i++){
+                        pic1 = responseBody.getJSONObject(i).getString("foto");
+
+                        final byte[] decodedBytes = Base64.decode(pic1.getBytes(), 0);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                        modelPoses.add(responseBody.getJSONObject(i).getString("naam"));
+
+
+                        String randomFileName = responseBody.getJSONObject(i).getString("naam")  + ".jpg"; //+ randomNum;
+
+                        ImageUtils.saveBitmap(decodedByte, randomFileName);
+                        String path_recorded_img = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "tensorflow/"+ randomFileName;
+
+
+                        Log.d("APP", "first pic: " + pic1);
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String errorResponse, Throwable error) {
+                //Print error
+                Log.d("APP", errorResponse + "   " + error.toString());
+                Log.d("APP", "----ERROORRRRRRRRRR");
+            }
+        });
+
+
+        Log.d("APP", "refresh readyy !!!");
+        parent.displayFeedback("Models loaded");
+
+        return modelPoses;
+    }
+
+
     private void parseMatchJSON() {
         try {
             //String match = keypointsResponse.getJSONObject("match").toString();
-            matchOrNot =  keypointsResponse.getJSONArray("match").toString();
+            matchOrNot =  String.valueOf(keypointsResponse.getBoolean("match"));
+            sp_score = (double) keypointsResponse.getJSONArray("SP").get(0);
+            mp_score = (double) Math.round(keypointsResponse.getDouble("MP")*100.0)/100.0;
+            us_score = keypointsResponse.getDouble("US");
             Log.d("APP" , "----match result: " + matchOrNot);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -119,24 +208,17 @@ public class ServerInterface implements UploadInterface{
 
 
     // oude functie toen findMatch() nog niet bestond en server enkel keypoints terug gaf.
-    public void uploadImg(File imgToUpload) {
-        String Url = "http://1dr8.be/upload";
+    public void uploadNewModel(File imgToUpload, final MainActivity parent) {
+        String Url = "http://1dr8.be/uploadPose";
         //If any auth is needed
         String username = "username";
         String password = "password";
-
-//        Cursor cursor = getContentResolver().query(Media.EXTERNAL_CONTENT_URI, new String[]{Media.DATA, Media.DATE_ADDED, MediaStore.Images.ImageColumns.ORIENTATION}, Media.DATE_ADDED, null, "date_added ASC");
-//        if (cursor != null && cursor.moveToLast()) {
-//            Uri fileURI = Uri.parse(cursor.getString(cursor.getColumnIndex(Media.DATA)));
-//            fileSrc = fileURI.toString();
-//            cursor.close();
-//        }
 
         // Bitmap compressedImage = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
         AsyncHttpClient client = new AsyncHttpClient();
         client.setBasicAuth(username, password);
         client.addHeader("enctype", "multipart/form-data");
-        RequestParams params = new RequestParams();
+        final RequestParams params = new RequestParams();
         try {
             //params.put("pic", storeImage(imgToUpload));
             params.put("file", imgToUpload);
@@ -150,11 +232,12 @@ public class ServerInterface implements UploadInterface{
                 Log.d("APP ", "Gelukt!!!:");
                 Log.d("APP", "antwoord: " + responseBody.toString());
 
-                keypointsResponse = responseBody;
-                parseKeypointsJSON();
+                try {
+                    parent.displayFeedback("new model added with id " + String.valueOf(responseBody.getInt("id")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                //signal parent activity upload is ready
-                parentCallback.signalImgUploadReady(true, "server");
             }
 
             @Override
@@ -162,28 +245,11 @@ public class ServerInterface implements UploadInterface{
                 //Print error
                 Log.d("APP", errorResponse + "   " + error.toString());
                 Log.d("APP", "----ERROORRRRRRRRRR");
+                parent.displayFeedback(errorResponse.toString());
             }
         });
     }
 
-    private File storeImage(File imgToUpload) {
-        // Deze functie dient om img in te laden in geheugen van app, maar img zit al in geheugen want is juist gemaakt met camera
-
-        String filename = "anyName";
-        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-        OutputStream outStream = null;
-
-        //File file = new File(extStorageDirectory, filename + ".jpg");
-        try {
-            outStream = new FileOutputStream(imgToUpload);
-            //bookImage.compress(Bitmap.CompressFormat.JPEG, 80, outStream);
-            outStream.flush();
-            outStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return imgToUpload;
-    }
 
     //parsen van keypoints
     public void parseKeypointsJSON(){
@@ -239,5 +305,17 @@ public class ServerInterface implements UploadInterface{
 
     public String isMatchOrNot() {
         return matchOrNot;
+    }
+
+    public double getSp_score() {
+        return sp_score;
+    }
+
+    public double getMp_score() {
+        return mp_score;
+    }
+
+    public double getUs_score() {
+        return us_score;
     }
 }

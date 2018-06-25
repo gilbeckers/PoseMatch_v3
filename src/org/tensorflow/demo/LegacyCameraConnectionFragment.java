@@ -44,6 +44,8 @@ public class LegacyCameraConnectionFragment extends Fragment {
   private Camera.PreviewCallback imageListener;
   private Size desiredSize;
 
+
+
   /**
    * The layout identifier to inflate for this Fragment.
    */
@@ -102,11 +104,20 @@ public class LegacyCameraConnectionFragment extends Fragment {
             camera.release();
           }
 
-          camera.setPreviewCallbackWithBuffer(imageListener);
-          Camera.Size s = camera.getParameters().getPreviewSize();
-          camera.addCallbackBuffer(new byte[ImageUtils.getYUVByteSize(s.height, s.width)]);
 
-          textureView.setAspectRatio(s.height, s.width);
+
+
+          camera.setPreviewCallbackWithBuffer(imageListener);
+          //Camera.Size s = camera.getParameters().getPreviewSize();
+          //camera.addCallbackBuffer(new byte[ImageUtils.getYUVByteSize(s.height, s.width)]);
+          //textureView.setAspectRatio(s.height, s.width);
+
+          // TODO: hard-coded preview sizes ....
+          int aheight = 480;
+          int awidth= 640;
+
+          camera.addCallbackBuffer(new byte[ImageUtils.getYUVByteSize(aheight, awidth)]);
+          textureView.setAspectRatio(aheight, awidth  );
 
           camera.startPreview();
         }

@@ -62,9 +62,9 @@ public class DrawerUtil {
         //        .withName(R.string.settings).withIcon(FontAwesome.Icon.faw_binoculars);
         SecondaryDrawerItem drawerItemAbout = new SecondaryDrawerItem().withIdentifier(5)
                 .withName(R.string.about).withIcon(FontAwesome.Icon.faw_pencil);
+        SecondaryDrawerItem drawerItemCredits = new SecondaryDrawerItem().withIdentifier(6)
+                .withName(R.string.help).withIcon(FontAwesome.Icon.faw_fire);
         /*
-        SecondaryDrawerItem drawerItemHelp = new SecondaryDrawerItem().withIdentifier(6)
-                .withName(R.string.help).withIcon(FontAwesome.Icon.faw_wifi);
         SecondaryDrawerItem drawerItemDonate = new SecondaryDrawerItem().withIdentifier(7)
                 .withName(R.string.donate).withIcon(FontAwesome.Icon.faw_magic);
                 */
@@ -110,6 +110,7 @@ public class DrawerUtil {
                         new DividerDrawerItem(),
                         //drawerItemSettings,
                         drawerItemAbout,
+                        drawerItemCredits,
                         //drawerItemHelp,
                         //drawerItemDonate,
                         drawerSignOut
@@ -139,6 +140,10 @@ public class DrawerUtil {
 
                         if(drawerItem.getIdentifier() == 5){
                             loadAboutActivity(activity);
+                        }
+
+                        if(drawerItem.getIdentifier() == 6){
+
                         }
 
                         // Change host: server jochen <-> cloud

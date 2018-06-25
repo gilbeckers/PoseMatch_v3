@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="com.algorithmia:algorithmia-android:1.0.1@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.algorithmia/algorithmia-android/1.0.1/22f55eb2644a8ed78388558d1eedc9ac42557d81/algorithmia-android-1.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.algorithmia/algorithmia-android/1.0.1/ce091e139314404b068b35431aee8c8c9600c6c0/algorithmia-android-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
